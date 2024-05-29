@@ -29,6 +29,5 @@ public class UserController {
         var autheticationToken = new UsernamePasswordAuthenticationToken(login.login(),login.password());
         var autheticantion = manager.authenticate(autheticationToken);
         return ResponseEntity.ok(new DataTokens(service.generatesTokens((User) autheticantion.getPrincipal())));
-
     }
 }

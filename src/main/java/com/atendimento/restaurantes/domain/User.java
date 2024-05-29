@@ -21,14 +21,29 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "logins")
+    @Column(name = "logins",unique = true)
     private String logins;
     @Column(name = "senhas")
     private String passwords;
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRoles roles;
+
+    public User(String cpf, String hashedPassword) {
+        this.logins = cpf;
+        this.passwords = hashedPassword;
+        this.roles = UserRoles.EMPLOYEE;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(this.roles == UserRoles.BOSS){
+            return List.of(new SimpleGrantedAuthority("ROLE_BOSS"),new SimpleGrantedAuthority("ROLE_EMPLOYEE"),new SimpleGrantedAuthority("ROLE_USER"));
+        }else if(this.roles == UserRoles.EMPLOYEE){
+            return List.of(new SimpleGrantedAuthority("ROLE_EMPLOYEE"),new SimpleGrantedAuthority("ROLE_USER"));
+        }else{
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override

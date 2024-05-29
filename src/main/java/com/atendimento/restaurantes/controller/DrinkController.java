@@ -33,7 +33,7 @@ public class DrinkController {
     }
     @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity update(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id){
         return drinkService.deleteDrink(id);
     }
     @GetMapping("{id}")

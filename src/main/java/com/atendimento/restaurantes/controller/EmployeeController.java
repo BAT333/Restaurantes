@@ -27,7 +27,6 @@ public class EmployeeController {
     @PostMapping
     @Transactional
     public ResponseEntity<DataEmployee> register(@RequestBody @Valid DataRegisterEmployee dataRester, UriComponentsBuilder builder){
-
         return this.service.registerEmployee(dataRester,builder);
     }
     @PutMapping("{id}")

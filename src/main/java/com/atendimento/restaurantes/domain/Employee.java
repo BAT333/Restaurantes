@@ -21,7 +21,7 @@ public class Employee {
     private Long id;
     @Column(name = "nome")
     private String name;
-    @Column(name = "cpf")
+    @Column(name = "cpf",unique = true)
     private String cpf;
     @Column(name = "nascimento")
     private LocalDate birthDate;

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class DishFoodService {
+
     @Autowired
     private DishFoodRepository dishFoodRepository;
     public ResponseEntity<DataFood> registerFood(DataFood food, UriComponentsBuilder builder) {
@@ -26,7 +27,7 @@ public class DishFoodService {
     public ResponseEntity<DataFood> updateFood(Long id, DataFood food) {
         Optional<DishFood> dishFood= dishFoodRepository.findById(id);
         dishFood.ifPresent(f->f.update(food));
-        return ResponseEntity.ok(new DataFood(dishFood.get()));
+        return dishFood.map(value -> ResponseEntity.ok(new DataFood(value))).orElse(ResponseEntity.badRequest().build());
     }
 
     public ResponseEntity deleteFood(Long id) {
@@ -40,7 +41,7 @@ public class DishFoodService {
     }
 
     public ResponseEntity<Page<DataFood>> foods(Pageable pageable) {
-       Page<DataFood> foods = dishFoodRepository.findAll(pageable).map(DataFood::new);
+       Page<DataFood> foods = dishFoodRepository.findByActiveTrue(pageable).map(DataFood::new);
         return ResponseEntity.ok(foods);
     }
 }

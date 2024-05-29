@@ -25,6 +25,8 @@ public record DataRegisterEmployee(
         DataFunction workspace,
         @Valid
         @NotNull
-        DataAddress address
+        DataAddress address,
+        @NotNull
+        String password
 ) {
 }
