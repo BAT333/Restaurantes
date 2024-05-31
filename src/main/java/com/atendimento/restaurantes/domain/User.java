@@ -1,5 +1,6 @@
 package com.atendimento.restaurantes.domain;
 
+import com.atendimento.restaurantes.model.User.UserUpdateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +76,16 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public void updateInfos(String logins,String passwords) {
+        if(logins!=null){
+            this.logins = logins;
+        }
+        if(passwords!=null){
+            this.passwords = passwords;
+        }
+
+
+    }
+
 }
