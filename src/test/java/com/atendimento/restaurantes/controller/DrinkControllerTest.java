@@ -26,7 +26,7 @@ class DrinkControllerTest {
 
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request without sending anything in json")
     void register01() throws Exception {
         String json = "{}";
@@ -41,7 +41,7 @@ class DrinkControllerTest {
        Assertions.assertEquals(400, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request")
     void register02() throws Exception {
         //ARRANGE
@@ -83,7 +83,7 @@ class DrinkControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("""
             sending an update without notifying which one is to be updated
             """)
@@ -101,7 +101,7 @@ class DrinkControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("""
             Updating with everything ok
             """)
@@ -125,7 +125,7 @@ class DrinkControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("""
             testing delete erro 405
             """)
@@ -139,7 +139,7 @@ class DrinkControllerTest {
         Assertions.assertEquals(405, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("""
             testing delete 200
             """)
@@ -153,7 +153,7 @@ class DrinkControllerTest {
         Assertions.assertEquals(200, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
     @DisplayName("""
             testing get  200
             """)
@@ -180,7 +180,7 @@ class DrinkControllerTest {
         Assertions.assertEquals(403, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
     @DisplayName("""
             testing get list 200
             """)

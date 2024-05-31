@@ -47,13 +47,13 @@ public class EmployeeService {
 
     public ResponseEntity<DataEmployee> employeeID(Long id) {
        Optional<Employee> employee = repository.findByIdAndActiveTrue(id);
-        return ResponseEntity.ok(new DataEmployee(employee.get()));
+        return employee.map(value -> ResponseEntity.ok(new DataEmployee(value))).orElse(ResponseEntity.noContent().build());
     }
 
     public ResponseEntity<DataEmployee> updateEmployee(Long id, DataUpdateEmployoo updateEmployoo) {
         Optional<Employee> employee = repository.findByIdAndActiveTrue(id);
         employee.ifPresent(em-> em.updateData(updateEmployoo));
-        return ResponseEntity.ok(new DataEmployee(employee.get()));
+        return employee.map(values-> ResponseEntity.ok(new DataEmployee(values))).orElse(ResponseEntity.noContent().build());
     }
 
     public ResponseEntity deleteEmployee(Long id) {

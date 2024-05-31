@@ -36,7 +36,7 @@ class FoodControllerTest {
 
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request without sending anything in json")
     void register01() throws Exception {
         String json = "{}";
@@ -51,7 +51,7 @@ class FoodControllerTest {
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request")
     void register02() throws Exception {
         //ARRANGE
@@ -96,7 +96,7 @@ class FoodControllerTest {
             Testing food update erro 405
                         
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void update01() throws Exception {
         String json = "{}";
         var response = mvc.perform(
@@ -112,7 +112,7 @@ class FoodControllerTest {
             Testing food update erro 200
                         
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void update02() throws Exception {
         String json = "{}";
         var response = mvc.perform(
@@ -127,7 +127,7 @@ class FoodControllerTest {
     @DisplayName("""
             Testing update about food by passing arguments                  
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void update03() throws Exception {
         DataFood food = new DataFood("A", BigDecimal.ZERO, "B");
         var response = mvc.perform(
@@ -142,7 +142,7 @@ class FoodControllerTest {
     @DisplayName("""
             Testing update about food by passing arguments                  
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void update04() throws Exception {
         DataFood food = new DataFood("A", null, null);
         var response = mvc.perform(
@@ -157,7 +157,7 @@ class FoodControllerTest {
     @DisplayName("""
             No json                
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void update05() throws Exception {
         String json ="";
         var response = mvc.perform(
@@ -172,7 +172,7 @@ class FoodControllerTest {
     @DisplayName("""
             delete erro 400                
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void delete01() throws Exception {
         String json ="";
         var response = mvc.perform(
@@ -186,7 +186,7 @@ class FoodControllerTest {
     @DisplayName("""
             delete 200                
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     void delete02() throws Exception {
         var response = mvc.perform(
                 delete("/food/1")
@@ -199,7 +199,7 @@ class FoodControllerTest {
     @DisplayName("""
             get 200                
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
     void get01() throws Exception {
         var response = mvc.perform(
                 get("/food/1")
@@ -212,7 +212,7 @@ class FoodControllerTest {
     @DisplayName("""
             get 200                
             """)
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
 
     void get02() throws Exception {
         var response = mvc.perform(
@@ -246,7 +246,7 @@ class FoodControllerTest {
         Assertions.assertEquals(403, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "EMPLOYEE")
+    @WithMockUser(roles = "USER")
     @DisplayName("if you have the wrong role")
     void role02() throws Exception {
         //ARRANGE

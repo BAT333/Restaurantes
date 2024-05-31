@@ -24,7 +24,7 @@ class OrderControllerTest {
     private OrderService orderService;
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request without sending anything in json")
     void register01() throws Exception {
         String json = "{}";
@@ -39,7 +39,7 @@ class OrderControllerTest {
         Assertions.assertEquals(400, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Logged in user trying to make a request")
     void register02() throws Exception {
         //ARRANGE
@@ -121,7 +121,7 @@ class OrderControllerTest {
 
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Update with status 200")
     void update01() throws Exception {
         //ARRANGE
@@ -141,7 +141,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("Update with status 400")
     void update02() throws Exception {
         //ARRANGE
@@ -179,7 +179,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("delete with status 200")
     void delete01() throws Exception {
         //ARRANGE
@@ -193,7 +193,7 @@ class OrderControllerTest {
         Assertions.assertEquals(200, response.getStatus());
     }
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "EMPLOYEE")
     @DisplayName("delete with status 405")
     void delete02() throws Exception {
         //ARRANGE
@@ -209,7 +209,7 @@ class OrderControllerTest {
 
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
     @DisplayName("get with status 200")
     void get01() throws Exception {
         //ARRANGE
@@ -224,7 +224,7 @@ class OrderControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "BOSS")
+    @WithMockUser(roles = "USER")
     @DisplayName("get with status 200")
     void get02() throws Exception {
         //ARRANGE

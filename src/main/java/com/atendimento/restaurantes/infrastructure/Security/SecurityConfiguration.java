@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                     authorize.requestMatchers(HttpMethod.GET,"/employee","/employee/**").hasRole("BOSS");
                     authorize.requestMatchers(HttpMethod.DELETE,"/employee/**").hasRole("BOSS");
                     authorize.requestMatchers(HttpMethod.PUT,"/employee/**").hasRole("BOSS");
-                    authorize.requestMatchers(HttpMethod.POST,"/drink","/food","/demand/**").hasRole("EMPLOYEE");
+                    authorize.requestMatchers(HttpMethod.POST,"/drink","/food","/demand/**","/food/**","/drink/**").hasRole("EMPLOYEE");
                     authorize.requestMatchers(HttpMethod.DELETE,"/drink/**","/food/**","/demand/**").hasRole("EMPLOYEE");
                     authorize.requestMatchers(HttpMethod.PUT,"/drink/**","/food/**","/demand/**").hasRole("EMPLOYEE");
                     authorize.requestMatchers(HttpMethod.PUT,"/login/update").hasRole("USER");
