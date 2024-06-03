@@ -2,6 +2,7 @@ package com.atendimento.restaurantes.controller;
 
 import com.atendimento.restaurantes.model.drink.DataDrink;
 import com.atendimento.restaurantes.service.Drink.DrinkService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
