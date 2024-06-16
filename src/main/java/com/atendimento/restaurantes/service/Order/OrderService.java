@@ -1,6 +1,8 @@
 package com.atendimento.restaurantes.service.Order;
 
 import com.atendimento.restaurantes.domain.*;
+import com.atendimento.restaurantes.http.PayFeign;
+import com.atendimento.restaurantes.model.RegisterDataPayDTO;
 import com.atendimento.restaurantes.model.order.*;
 import com.atendimento.restaurantes.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class OrderService {
     private EmployeeRepository employeeRepository;
     @Autowired
     private OrderTotalRepository orderTotalRepository;
+    @Autowired
+    private PayFeign feign;
 
 
 
@@ -34,7 +38,12 @@ public class OrderService {
         OrderTotal total= orderTotalRepository.save(new OrderTotal(order));
         this.registerOrder(order,id,total);
         URI uri = builder.path("demand/{id}").buildAndExpand(total.getId()).toUri();
+        this.registerPay(total);
         return ResponseEntity.created(uri).body(new DataDamand(total));
+    }
+
+    private void registerPay(OrderTotal total) {
+        feign.registerPay(new RegisterDataPayDTO(total));
     }
 
     private void registerOrder(DataOrder order, Long id,OrderTotal total) {
