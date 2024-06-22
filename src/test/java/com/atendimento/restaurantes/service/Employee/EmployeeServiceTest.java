@@ -34,24 +34,20 @@ class EmployeeServiceTest {
     private UriComponentsBuilder builder;
     @Mock
     private EmployeeRepository employeeRepository;
-    @Mock
-    private UserRepository userRepository;
+
     @Mock
     private FunctionEmployeeRepository repositoryFunction;
     @Captor
     private ArgumentCaptor<FunctionEmployee> functionEmployee;
     @Captor
     private ArgumentCaptor<Employee> employee;
-    @Captor
-    private ArgumentCaptor<User> userArgumentCaptor;
+
     @Mock
     private Workspace workspace;
     @Spy
     private URI uri;
     @Mock
     private Employee employees;
-    @Mock
-    private User willReturn;
     @Mock
     private FunctionEmployee willReturn2;
     @Mock
@@ -68,28 +64,9 @@ class EmployeeServiceTest {
         Assertions.assertThrows(RuntimeException.class,()->employeeService.registerEmployee(dto,builder));
         then(repositoryFunction).should().save(functionEmployee.capture());
         then(employeeRepository).should().save(employee.capture());
-        then(userRepository).should().save(userArgumentCaptor.capture());
-
-        User userexpectation = new User("5",null);
-
-        User userlues = userArgumentCaptor.getValue();
-        Assertions.assertEquals(userexpectation.getLogins(),userlues.getLogins());
-
-
 
     }
-    @Test
-    @DisplayName("Testing encryption")
-    void register02(){
-        dto =this.dtosInfos();
-        Assertions.assertThrows(RuntimeException.class,()->employeeService.registerEmployee(dto,builder));
-        then(userRepository).should().save(userArgumentCaptor.capture());
-        User userlues = userArgumentCaptor.getValue();
-        User userexpectation = new User("5","4552");
-        Assertions.assertEquals(userexpectation.getLogins(),userlues.getLogins());
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        Assertions.assertTrue(passwordEncoder.matches(userexpectation.getPassword(), userlues.getPassword()));
-    }
+
 
     @Test
     @DisplayName("Checking that the builder is running without error")
@@ -102,13 +79,7 @@ class EmployeeServiceTest {
         uri = builder.path("employee/1").build().toUri();
         Assertions.assertDoesNotThrow(()->employeeService.registerEmployee(dto,builder));
     }
-    @Test
-    @DisplayName("Testing validation")
-    void register04(){
-        dto =this.dtosInfos();
-        given(userRepository.existsByLogins(dto.cpf())).willReturn(true);
-        Assertions.assertEquals(HttpStatus.BAD_REQUEST,employeeService.registerEmployee(dto,builder).getStatusCode());
-    }
+
 
 
     @Test
