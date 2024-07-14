@@ -25,8 +25,10 @@ public class OrderService {
     private DrinkRepository drinkRepository;
     @Autowired
     private DishFoodRepository dishFoodRepository;
-    @Autowired
+   /* @Autowired
     private EmployeeRepository employeeRepository;
+
+    */
     @Autowired
     private OrderTotalRepository orderTotalRepository;
     @Autowired
@@ -56,12 +58,14 @@ public class OrderService {
 
     private void FoodBigger(DataOrder order, Long id, OrderTotal total) {
         if(order.foods().size()>order.Drinks().size()){
-            Employee employee = employeeRepository.getReferenceById(id);
+            /*  Employee employee = employeeRepository.getReferenceById(id);
+
+             */
             List<Order>orders = new ArrayList<>();
             Drink drinktest = drinkRepository.getReferenceById(1L);
             for(Food food:order.foods()){
                 DishFood dishFood = dishFoodRepository.getReferenceById(food.idFood());
-                orders.add(new Order(dishFood,food.quantityFood(),employee,order,drinktest));
+                orders.add(new Order(dishFood,food.quantityFood(),null,order,drinktest));
             }
             for(int i =0; i<order.Drinks().size();i++){
                 Drink drink = drinkRepository.getReferenceById(order.Drinks().get(i).idDrink());
@@ -75,12 +79,14 @@ public class OrderService {
 
     private void DrinksBigger(DataOrder order, Long id, OrderTotal total) {
         if(order.Drinks().size()>=order.foods().size()){
-            Employee employee = employeeRepository.getReferenceById(id);
+           /*   Employee employee = employeeRepository.getReferenceById(id);
+
+            */
             List<Order>orders = new ArrayList<>();
             DishFood foodtest = dishFoodRepository.getReferenceById(1L);
             for(Drinks drinks:order.Drinks()){
                 Drink drink = drinkRepository.getReferenceById(drinks.idDrink());
-                orders.add(new Order(drink,drinks.quantityDrink(),employee,order,foodtest));
+                orders.add(new Order(drink,drinks.quantityDrink(),null,order,foodtest));
             }
             for(int i =0; i<order.foods().size();i++){
                 DishFood food = dishFoodRepository.getReferenceById(order.foods().get(i).idFood());

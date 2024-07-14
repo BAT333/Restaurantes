@@ -21,9 +21,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "funcionario")
-    private Employee employee;
+    @Column(name = "funcionario")
+    private Long employee;
     @ManyToOne
     @JoinColumn(name = "bebida")
     private Drink drink;
@@ -48,7 +47,7 @@ public class Order {
     @JoinColumn(name = "total")
     private OrderTotal orderTotal;
 
-    public Order(Drink drink, Integer quantityDrink,Employee employee,DataOrder order,DishFood dishFood) {
+    public Order(Drink drink, Integer quantityDrink,Long employee,DataOrder order,DishFood dishFood) {
         this.employee = employee;
         this.drink = drink;
         this.quantityDrink = quantityDrink;
@@ -57,7 +56,7 @@ public class Order {
         this.description = order.description();
         this.dishFood = dishFood;
     }
-    public Order(DishFood food, Integer quantityFood,Employee employee,DataOrder order,Drink drink) {
+    public Order(DishFood food, Integer quantityFood,Long employee,DataOrder order,Drink drink) {
         this.dishFood = food;
         this.valueFood = food.getValue();
         this.quantityFood = quantityFood;
