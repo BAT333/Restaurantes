@@ -1,7 +1,6 @@
 package com.atendimento.restaurantes.http;
 
 import com.atendimento.restaurantes.http.Config.FeignConfig;
-import com.atendimento.restaurantes.model.Employee.DataLoginsDTO;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
